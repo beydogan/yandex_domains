@@ -1,8 +1,6 @@
 # YandexDomains
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/yandex_domains`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Ruby client for [Yandex.Mail for Domains API](https://tech.yandex.com/domain). 
 
 ## Installation
 
@@ -22,17 +20,33 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+This client works for only **Administrator** access. More details about Administrator user is [here](https://tech.yandex.com/domain/doc/concepts/termin-docpage/).  In order to use the client and API features, the PDD token is required. You can get a PDD token on the [token management](https://pddimp.yandex.ru/api2/admin/get_token)  page by entering a domain name that has already been verified.
 
-## Development
+```ruby
+client = YandexDomains::Client.new(pdd_token)
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
+## Usage Examples
+After configuring a client, you can do the followings.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+**Signing up a domain**
+```ruby
+client.connect('google.com')
+```
+
+** Adding a mailbox for a domain**
+```ruby
+client.add_mailbox('google.com', 'hi', 'strongpassword')
+```
+
+** Deleting a mailbox on a domain**
+```ruby
+client.delete_mailbox('google.com', 'hi')
+```
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/yandex_domains/fork )
+1. Fork it ( https://github.com/beydogan/yandex_domains/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
