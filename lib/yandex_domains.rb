@@ -127,7 +127,7 @@ module YandexDomains
       req = self.class.post("/admin/email/edit", query: query)
       req.parsed_response
     end
-    # Used for editing mailbox parameters: password, user's first and last name, and so on.
+    # Used for deleting a mailbox on a domain
     # @param domain [String] Name of the domain.
     # @param login [String] The email address of the mailbox, in the format “username@domain.com” or “username”.
     # @return [Hash] Parsed Response
