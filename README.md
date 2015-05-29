@@ -36,7 +36,7 @@ After configuring a client, you can do the followings.
 
 **Signing up a domain**
 ```ruby
-client.connect('google.com')
+client.connect_domain('google.com')
 ```
 
 **Adding a mailbox for a domain**
