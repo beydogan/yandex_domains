@@ -17,6 +17,10 @@ And then execute:
 Or install it yourself as:
 
     $ gem install yandex_domains
+    
+## Documentation
+
+http://www.rubydoc.info/github/beydogan/yandex_domains/
 
 ## Usage
 
