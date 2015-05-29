@@ -26,7 +26,7 @@ http://www.rubydoc.info/github/beydogan/yandex_domains/
 
 This client works for only **Administrator** access. More details about Administrator user is [here](https://tech.yandex.com/domain/doc/concepts/termin-docpage/).  In order to use the client and API features, the PDD token is required. You can get a PDD token on the [token management](https://pddimp.yandex.ru/api2/admin/get_token)  page by entering a domain name that has already been verified.
 
-** Initialize a client **
+**Initialize a client**
 ```ruby
 client = YandexDomains::Client.new(pdd_token)
 ```
@@ -39,12 +39,12 @@ After configuring a client, you can do the followings.
 client.connect('google.com')
 ```
 
-** Adding a mailbox for a domain**
+**Adding a mailbox for a domain**
 ```ruby
 client.add_mailbox('google.com', 'hi', 'strongpassword')
 ```
 
-** Deleting a mailbox on a domain**
+**Deleting a mailbox on a domain**
 ```ruby
 client.delete_mailbox('google.com', 'hi')
 ```
