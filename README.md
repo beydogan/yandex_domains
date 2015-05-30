@@ -49,6 +49,8 @@ client.add_mailbox('google.com', 'hi', 'strongpassword')
 client.delete_mailbox('google.com', 'hi')
 ```
 
+[More examples here](http://www.rubydoc.info/github/beydogan/yandex_domains/)
+
 ## Contributing
 
 1. Fork it ( https://github.com/beydogan/yandex_domains/fork )
