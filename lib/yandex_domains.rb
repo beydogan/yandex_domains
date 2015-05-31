@@ -25,13 +25,37 @@ module YandexDomains
       req.parsed_response
     end
 
-    # The request is used for getting the results of the last check, the date and time the check was performed,
+    # Used for getting the results of the last check, the date and time the check was performed,
     # and the date and time of the next check.
     # @param [String] domain
     # @return [Hash] Parsed Response
     # @see https://api.yandex.com.tr/kurum/doc/reference/domain-registrationstatus.xml
     def registration_status(domain)
       req = self.class.get("/admin/domain/registration_status", {query: {domain: domain}})
+      req.parsed_response
+    end
+
+    # Get current domain properties: the status of connecting and delegating the domain to Yandex,
+    # the mailbox interface language and design, and the POP and IMAP modes.
+    # @param [String] domain
+    # @return [Hash] Parsed Response
+    # @example Example Usage
+    #   client.details('google.com)
+    # @example Return Hash
+    #   {
+    #       "domain": "{domain name}",
+    #       "status": "{domain status}",
+    #       "stage": "{service key}",
+    #       "delegated": "{status of delegating domain to Yandex}",
+    #       "country": "{interface language}",
+    #       "imap_enabled": "{status of IMAP operation}",
+    #       "pop_enabled": "{status of POP operation}",
+    #       "default_theme": "{design theme ID}",
+    #       "success": "{status of request execution}"
+    #   }
+    # @see https://tech.yandex.com/domain/doc/reference/domain-details-docpage/
+    def details(domain)
+      req = self.class.get("/admin/domain/details", {query: {domain: domain}})
       req.parsed_response
     end
 
@@ -127,6 +151,7 @@ module YandexDomains
       req = self.class.post("/admin/email/edit", query: query)
       req.parsed_response
     end
+
     # Used for deleting a mailbox on a domain
     # @param domain [String] Name of the domain.
     # @param login [String] The email address of the mailbox, in the format “username@domain.com” or “username”.
@@ -144,6 +169,5 @@ module YandexDomains
       req = self.class.post("/admin/email/del", {query: {domain: domain, login: login}})
       req.parsed_response
     end
-
   end
 end
