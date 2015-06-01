@@ -1,6 +1,7 @@
 [![Gem Version](https://badge.fury.io/rb/yandex_domains.svg)](http://badge.fury.io/rb/yandex_domains)
 [![Build Status](https://travis-ci.org/beydogan/yandex_domains.svg)](https://travis-ci.org/beydogan/yandex_domains)
-
+[![Code Climate](https://codeclimate.com/github/beydogan/yandex_domains/badges/gpa.svg)](https://codeclimate.com/github/beydogan/yandex_domains)
+[![Test Coverage](https://codeclimate.com/github/beydogan/yandex_domains/badges/coverage.svg)](https://codeclimate.com/github/beydogan/yandex_domains/coverage)
 # YandexDomains
 
 Ruby client for [Yandex.Mail for Domains API](https://tech.yandex.com/domain). 
