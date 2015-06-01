@@ -1,0 +1,9 @@
+{
+    "status": "added",
+    "domain": "google.com",
+    "success": "ok",
+    "last_check": "2015-06-01T02:19:53Z",
+    "next_check": "2015-06-01T14:24:00Z",
+    "check_results": "ok",
+    "stage": "added"
+}

@@ -5,7 +5,7 @@ describe YandexDomains::Admin::Domain do
     @client = YandexDomains::Client.new("PDD")
   end
 
-  describe "/register" do
+  describe "#register" do
     before do
       stub_post('/admin/domain/register')
       .with(query: {domain: 'google.com'}, :headers => {'Pddtoken'=>'PDD'})
@@ -15,7 +15,7 @@ describe YandexDomains::Admin::Domain do
       )
     end
 
-    it 'requests the correct resource on GET' do
+    it 'requests the correct resource on POST' do
       @client.connect_domain("google.com")
       expect(a_post('/admin/domain/register').with(query: {domain: 'google.com'})).to have_been_made
     end
@@ -26,9 +26,51 @@ describe YandexDomains::Admin::Domain do
     end
   end
 
-  # it '/registration_status' do
-  #   pending "TODO"
-  # end
+  describe '#registration_status' do
+    context 'if waiting activation' do
+      before do
+        stub_get('/admin/domain/registration_status')
+        .with(query: {domain: 'google.com'}, :headers => {'Pddtoken'=>'PDD'})
+        .to_return(
+            body: fixture('activate_domain.json'),
+            headers: {content_type: 'application/json; charset=utf-8'}
+        )
+      end
+
+      it 'requests the correct resource on GET' do
+        @client.registration_status("google.com")
+        expect(a_get('/admin/domain/registration_status').with(query: {domain: 'google.com'})).to have_been_made
+      end
+
+      it 'returns parsed response with status: domain-activate' do
+        resp = @client.registration_status("google.com")
+        expect(resp).to be_a Hash
+        expect(resp["status"]).to eq("domain-activate")
+      end
+    end
+
+    context 'if connected' do
+      before do
+        stub_get('/admin/domain/registration_status')
+        .with(query: {domain: 'google.com'}, :headers => {'Pddtoken'=>'PDD'})
+        .to_return(
+            body: fixture('added_domain.json'),
+            headers: {content_type: 'application/json; charset=utf-8'}
+        )
+      end
+
+      it 'requests the correct resource on GET' do
+        @client.registration_status("google.com")
+        expect(a_get('/admin/domain/registration_status').with(query: {domain: 'google.com'})).to have_been_made
+      end
+
+      it 'returns parsed response with status: domain-activate' do
+        resp = @client.registration_status("google.com")
+        expect(resp).to be_a Hash
+        expect(resp["status"]).to eq("added")
+      end
+    end
+  end
   #
   # it '/details' do
   #   pending "TODO"

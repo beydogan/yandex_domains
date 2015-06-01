@@ -1,0 +1,13 @@
+{
+    "status": "domain-activate",
+    "domain": "google.com",
+    "success": "ok",
+    "secrets": {
+        "content": "85e187bfe615",
+        "name": "05f0fa9b366a"
+    },
+    "last_check": "2015-06-01T19:17:05Z",
+    "next_check": "2015-06-01T19:20:00Z",
+    "check_results": "not checked",
+    "stage": "owner-check"
+}
