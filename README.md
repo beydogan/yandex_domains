@@ -1,3 +1,6 @@
+[![Gem Version](https://badge.fury.io/rb/yandex_domains.svg)](http://badge.fury.io/rb/yandex_domains)
+[![Build Status](https://travis-ci.org/beydogan/yandex_domains.svg)](https://travis-ci.org/beydogan/yandex_domains)
+
 # YandexDomains
 
 Ruby client for [Yandex.Mail for Domains API](https://tech.yandex.com/domain). 
