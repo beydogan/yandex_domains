@@ -71,10 +71,79 @@ describe YandexDomains::Admin::Domain do
       end
     end
   end
-  #
-  # it '/details' do
-  #   pending "TODO"
-  # end
+
+  describe '#details' do
+    context 'if waiting activation' do
+      before do
+        stub_get('/admin/domain/details')
+        .with(query: {domain: 'google.com'}, :headers => {'Pddtoken'=>'PDD'})
+        .to_return(
+            body: fixture('waiting_activation_domain_details.json'),
+            headers: {content_type: 'application/json; charset=utf-8'}
+        )
+      end
+
+      it 'requests the correct resource on GET' do
+        @client.details("google.com")
+        expect(a_get('/admin/domain/details').with(query: {domain: 'google.com'})).to have_been_made
+      end
+
+      it 'returns parsed response with status: domain-activate' do
+        resp = @client.details("google.com")
+        expect(resp).to be_a Hash
+        expect(resp["status"]).to eq("domain-activate")
+        expect(resp["domain"]).to eq("google.com")
+      end
+    end
+
+    context 'if connected' do
+      before do
+        stub_get('/admin/domain/details')
+        .with(query: {domain: 'google.com'}, :headers => {'Pddtoken'=>'PDD'})
+        .to_return(
+            body: fixture('added_domain_details.json'),
+            headers: {content_type: 'application/json; charset=utf-8'}
+        )
+      end
+
+      it 'requests the correct resource on GET' do
+        @client.details("google.com")
+        expect(a_get('/admin/domain/details').with(query: {domain: 'google.com'})).to have_been_made
+      end
+
+      it 'returns parsed response with status: added' do
+        resp = @client.details("google.com")
+        expect(resp).to be_a Hash
+        expect(resp["status"]).to eq("added")
+        expect(resp["domain"]).to eq("google.com")
+      end
+    end
+
+    context 'if does not exist' do
+      before do
+        stub_get('/admin/domain/details')
+        .with(query: {domain: 'google.com'}, :headers => {'Pddtoken'=>'PDD'})
+        .to_return(
+            body: fixture('none_domain_details.json'),
+            headers: {content_type: 'application/json; charset=utf-8'}
+        )
+      end
+
+      it 'requests the correct resource on GET' do
+        @client.details("google.com")
+        expect(a_get('/admin/domain/details').with(query: {domain: 'google.com'})).to have_been_made
+      end
+
+      it 'returns parsed response with status: none' do
+        resp = @client.details("google.com")
+        expect(resp).to be_a Hash
+        expect(resp["status"]).to eq("none")
+        expect(resp["domain"]).to eq("google.com")
+      end
+    end
+  end
+
+
   #
   # it '/delete' do
   #   pending "TODO"

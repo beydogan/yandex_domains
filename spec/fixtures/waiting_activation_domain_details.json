@@ -1,0 +1,8 @@
+{
+    "status": "domain-activate",
+    "domain": "google.com",
+    "success": "ok",
+    "master_admin": "yes",
+    "delegated": "no",
+    "stage": "owner-check"
+}

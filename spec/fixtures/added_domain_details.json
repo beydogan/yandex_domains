@@ -1,0 +1,13 @@
+{
+    "status": "added",
+    "domain": "google.com",
+    "imap_enabled": 1,
+    "success": "ok",
+    "default_theme": "",
+    "country": "tr",
+    "default_uid": 0,
+    "master_admin": "yes",
+    "pop_enabled": 1,
+    "delegated": "yes",
+    "stage": "added"
+}
