@@ -5,7 +5,7 @@ require 'yandex_domains'
 require 'webmock/rspec'
 require 'pry'
 
-WebMock.disable_net_connect!(allow: "https://codeclimate.com")
+WebMock.disable_net_connect!(allow: "codeclimate.com")
 
 # Source: https://github.com/sferik/twitter/blob/master/spec/helper.rb
 def a_delete(path)
