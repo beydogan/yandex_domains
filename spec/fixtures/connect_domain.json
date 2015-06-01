@@ -1,0 +1,11 @@
+{
+    "domain": "{domain name}",
+    "status": "{domain status}",
+    "stage": "{service key}",
+    "secrets":
+    {
+        "name": "{secret part of the name of the verification file}",
+        "content": "{secret content of the verification file}"
+    },
+    "success": "{status of request execution}"
+}
