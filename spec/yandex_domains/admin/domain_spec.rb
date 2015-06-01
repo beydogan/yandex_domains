@@ -24,6 +24,13 @@ describe YandexDomains::Admin::Domain do
       resp = @client.connect_domain("google.com")
       expect(resp).to be_a Hash
     end
+
+    context "if already owned" do
+      it 'returns error' do
+        pending "TODO"
+        expect(true).to eq(false)
+      end
+    end
   end
 
   describe '#registration_status' do
