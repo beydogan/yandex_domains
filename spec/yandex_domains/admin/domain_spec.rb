@@ -143,11 +143,54 @@ describe YandexDomains::Admin::Domain do
     end
   end
 
+  describe '#delete' do
+    context 'if exist' do
+      before do
+        stub_post('/admin/domain/remove')
+        .with(query: {domain: 'google.com'}, :headers => {'Pddtoken'=>'PDD'})
+        .to_return(
+            body: fixture('ok_delete_domain.json'),
+            headers: {content_type: 'application/json; charset=utf-8'}
+        )
+      end
 
-  #
-  # it '/delete' do
-  #   pending "TODO"
-  # end
+      it 'requests the correct resource on GET' do
+        @client.delete("google.com")
+        expect(a_post('/admin/domain/remove').with(query: {domain: 'google.com'})).to have_been_made
+      end
+
+      it 'returns parsed response with status: ok' do
+        resp = @client.delete("google.com")
+        expect(resp).to be_a Hash
+        expect(resp["status"]).to eq("ok")
+        expect(resp["domain"]).to eq("google.com")
+      end
+    end
+
+    context 'if does not exist' do
+      before do
+        stub_post('/admin/domain/remove')
+        .with(query: {domain: 'google.com'}, :headers => {'Pddtoken'=>'PDD'})
+        .to_return(
+            body: fixture('error_delete_domain.json'),
+            headers: {content_type: 'application/json; charset=utf-8'}
+        )
+      end
+
+      it 'requests the correct resource on GET' do
+        @client.delete("google.com")
+        expect(a_post('/admin/domain/remove').with(query: {domain: 'google.com'})).to have_been_made
+      end
+
+      it 'returns parsed response with status: ok' do
+        resp = @client.delete("google.com")
+        expect(resp).to be_a Hash
+        expect(resp["status"]).to eq("error")
+        expect(resp["domain"]).to eq("google.com")
+      end
+    end
+  end
+
   #
   # it '/set_country' do
   #   pending "TODO"
