@@ -191,6 +191,56 @@ describe YandexDomains::Admin::Domain do
     end
   end
 
+  describe '#set_country' do
+    context 'if exist' do
+      before do
+        stub_post('/admin/domain/settings/set_country')
+        .with(query: {domain: 'google.com', country: "en"}, :headers => {'Pddtoken'=>'PDD'})
+        .to_return(
+            body: fixture('ok_set_country.json'),
+            headers: {content_type: 'application/json; charset=utf-8'}
+        )
+      end
+
+      it 'requests the correct resource on POST' do
+        @client.set_country("google.com", "en")
+        expect(a_post('/admin/domain/settings/set_country').with(query: {domain: 'google.com'})).to have_been_made
+      end
+
+      it 'returns parsed response with success: ok' do
+        @client.set_country("google.com", "en")
+        expect(resp).to be_a Hash
+        expect(resp["success"]).to eq("ok")
+        expect(resp["country"]).to eq("en")
+        expect(resp["domain"]).to eq("google.com")
+      end
+    end
+
+    context 'if does not exist' do
+      before do
+        stub_post('/admin/domain/settings/set_country')
+        .with(query: {domain: 'google.com', country: "en"}, :headers => {'Pddtoken'=>'PDD'})
+        .to_return(
+            body: fixture('not_allowed_set_country.json'),
+            headers: {content_type: 'application/json; charset=utf-8'}
+        )
+      end
+
+      it 'requests the correct resource on POST' do
+        @client.set_country("google.com", "en")
+        expect(a_post('/admin/domain/settings/set_country').with(query: {domain: 'google.com'})).to have_been_made
+      end
+
+      it 'returns parsed response with status: error' do
+        @client.set_country("google.com", "en")
+        expect(resp).to be_a Hash
+        expect(resp["success"]).to eq("error")
+        expect(resp["error"]).to eq("not_allowed")
+        expect(resp["domain"]).to eq("google.com")
+      end
+    end
+  end
+
   #
   # it '/set_country' do
   #   pending "TODO"
