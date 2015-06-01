@@ -44,7 +44,6 @@ module YandexDomains
         req.parsed_response
       end
 
-
       # Used for deleting a domain that was connected by a user. All the domain's mailboxes will also be deleted.
       # @param [String] domain
       # @return [Hash] Parsed Response
@@ -64,6 +63,30 @@ module YandexDomains
       # @see https://tech.yandex.com/domain/doc/reference/domain-delete-docpage/
       def delete(domain)
         req = self.class.post("/admin/domain/delete", {query: {domain: domain}})
+        req.parsed_response
+      end
+
+      # Used for setting the language of the email interface for the domain.
+      # @param [String] domain
+      # @param [String] country code
+      # @return [Hash] Parsed Response
+      # @example Example Usage
+      #   client.delete('google.com)
+      # @example Return Hash if domain exists
+      #   {
+      #       "country": "en",
+      #       "domain": "google.com",
+      #       "success": "ok"
+      #   }
+      # @example Return Hash if domain doesn't exist
+      #   {
+      #       "domain": "google.com",
+      #       "success": "error",
+      #       "error": "not_allowed"
+      #   }
+      # @see https://tech.yandex.com/domain/doc/reference/domain-settings-set-country-docpage/
+      def set_country(domain, country)
+        req = self.class.post("/admin/domain/settings/set_country", {query: {domain: domain, country: country}})
         req.parsed_response
       end
     end

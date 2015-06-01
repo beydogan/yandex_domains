@@ -204,11 +204,11 @@ describe YandexDomains::Admin::Domain do
 
       it 'requests the correct resource on POST' do
         @client.set_country("google.com", "en")
-        expect(a_post('/admin/domain/settings/set_country').with(query: {domain: 'google.com'})).to have_been_made
+        expect(a_post('/admin/domain/settings/set_country').with(query: {domain: 'google.com', country: "en"})).to have_been_made
       end
 
       it 'returns parsed response with success: ok' do
-        @client.set_country("google.com", "en")
+        resp = @client.set_country("google.com", "en")
         expect(resp).to be_a Hash
         expect(resp["success"]).to eq("ok")
         expect(resp["country"]).to eq("en")
@@ -228,11 +228,11 @@ describe YandexDomains::Admin::Domain do
 
       it 'requests the correct resource on POST' do
         @client.set_country("google.com", "en")
-        expect(a_post('/admin/domain/settings/set_country').with(query: {domain: 'google.com'})).to have_been_made
+        expect(a_post('/admin/domain/settings/set_country').with(query: {domain: 'google.com', country: "en"})).to have_been_made
       end
 
       it 'returns parsed response with status: error' do
-        @client.set_country("google.com", "en")
+        resp = @client.set_country("google.com", "en")
         expect(resp).to be_a Hash
         expect(resp["success"]).to eq("error")
         expect(resp["error"]).to eq("not_allowed")
