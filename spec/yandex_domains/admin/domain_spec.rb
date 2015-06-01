@@ -146,7 +146,7 @@ describe YandexDomains::Admin::Domain do
   describe '#delete' do
     context 'if exist' do
       before do
-        stub_post('/admin/domain/remove')
+        stub_post('/admin/domain/delete')
         .with(query: {domain: 'google.com'}, :headers => {'Pddtoken'=>'PDD'})
         .to_return(
             body: fixture('ok_delete_domain.json'),
@@ -154,22 +154,22 @@ describe YandexDomains::Admin::Domain do
         )
       end
 
-      it 'requests the correct resource on GET' do
+      it 'requests the correct resource on POST' do
         @client.delete("google.com")
-        expect(a_post('/admin/domain/remove').with(query: {domain: 'google.com'})).to have_been_made
+        expect(a_post('/admin/domain/delete').with(query: {domain: 'google.com'})).to have_been_made
       end
 
-      it 'returns parsed response with status: ok' do
+      it 'returns parsed response with success: ok' do
         resp = @client.delete("google.com")
         expect(resp).to be_a Hash
-        expect(resp["status"]).to eq("ok")
+        expect(resp["success"]).to eq("ok")
         expect(resp["domain"]).to eq("google.com")
       end
     end
 
     context 'if does not exist' do
       before do
-        stub_post('/admin/domain/remove')
+        stub_post('/admin/domain/delete')
         .with(query: {domain: 'google.com'}, :headers => {'Pddtoken'=>'PDD'})
         .to_return(
             body: fixture('error_delete_domain.json'),
@@ -177,15 +177,15 @@ describe YandexDomains::Admin::Domain do
         )
       end
 
-      it 'requests the correct resource on GET' do
+      it 'requests the correct resource on POST' do
         @client.delete("google.com")
-        expect(a_post('/admin/domain/remove').with(query: {domain: 'google.com'})).to have_been_made
+        expect(a_post('/admin/domain/delete').with(query: {domain: 'google.com'})).to have_been_made
       end
 
-      it 'returns parsed response with status: ok' do
+      it 'returns parsed response with status: error' do
         resp = @client.delete("google.com")
         expect(resp).to be_a Hash
-        expect(resp["status"]).to eq("error")
+        expect(resp["success"]).to eq("error")
         expect(resp["domain"]).to eq("google.com")
       end
     end

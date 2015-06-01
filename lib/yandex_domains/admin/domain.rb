@@ -43,6 +43,29 @@ module YandexDomains
         req = self.class.get("/admin/domain/details", {query: {domain: domain}})
         req.parsed_response
       end
+
+
+      # Used for deleting a domain that was connected by a user. All the domain's mailboxes will also be deleted.
+      # @param [String] domain
+      # @return [Hash] Parsed Response
+      # @example Example Usage
+      #   client.delete('google.com)
+      # @example Return Hash if domain exists
+      #   {
+      #       "domain": "google.com",
+      #       "success": "ok"
+      #   }
+      # @example Return Hash if domain doesn't exist
+      #   {
+      #       "domain": "google.com",
+      #       "success": "error",
+      #       "error": "not_allowed"
+      #   }
+      # @see https://tech.yandex.com/domain/doc/reference/domain-delete-docpage/
+      def delete(domain)
+        req = self.class.post("/admin/domain/delete", {query: {domain: domain}})
+        req.parsed_response
+      end
     end
   end
 end
