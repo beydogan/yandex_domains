@@ -4,7 +4,7 @@
 [![Test Coverage](https://codeclimate.com/github/beydogan/yandex_domains/badges/coverage.svg)](https://codeclimate.com/github/beydogan/yandex_domains/coverage)
 # YandexDomains
 
-Ruby client for [Yandex.Mail for Domains API](https://tech.yandex.com/domain). 
+Ruby client for [Yandex Domains API](https://tech.yandex.com/domain). 
 
 ## Installation
 
