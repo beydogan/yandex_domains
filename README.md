@@ -55,6 +55,10 @@ client.delete_mailbox('google.com', 'hi')
 
 [More examples here](http://www.rubydoc.info/github/beydogan/yandex_domains/)
 
+## Any ideas?
+
+Use [Gitcussion](http://www.gitcussion.com) to send your ideas on [here](http://www.gitcussion.com/r/beydogan/yandex_domains/)
+
 ## Contributing
 
 1. Fork it ( https://github.com/beydogan/yandex_domains/fork )
