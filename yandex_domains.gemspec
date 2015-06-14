@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Mehmet Beydogan"]
   spec.email         = ["m@mehmet.pw"]
 
-  spec.summary       = %q{Ruby client for Yandex.Mail for Domains API}
-  spec.homepage      = "http://github.com/beydogan/yandex-domains"
+  spec.summary       = %q{Ruby client for Yandex Domains API}
+  spec.homepage      = "http://github.com/beydogan/yandex_domains"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
